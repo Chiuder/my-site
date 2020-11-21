@@ -50,18 +50,17 @@ public class AttAchController {
     private QiniuCloudService qiniuCloudService;
 
 
-
     @ApiOperation("文件管理首页")
     @GetMapping(value = "")
     public String index(
             @ApiParam(name = "page", value = "页数", required = false)
             @RequestParam(name = "page", required = false, defaultValue = "1")
-            int page,
+                    int page,
             @ApiParam(name = "limit", value = "条数", required = false)
             @RequestParam(name = "limit", required = false, defaultValue = "12")
-            int limit,
+                    int limit,
             HttpServletRequest request
-    ){
+    ) {
         PageInfo<AttAchDto> atts = attAchService.getAtts(page, limit);
         request.setAttribute("attachs", atts);
         request.setAttribute(Types.ATTACH_URL.getType(), Commons.site_option(Types.ATTACH_URL.getType(), Commons.site_url()));
@@ -70,21 +69,19 @@ public class AttAchController {
     }
 
 
-
-
     @ApiOperation("markdown文件上传")
     @PostMapping("/uploadfile")
     public void fileUpLoadToTencentCloud(HttpServletRequest request,
-                                                HttpServletResponse response,
-                                                @ApiParam(name = "editormd-image-file", value = "文件数组", required = true)
-                                                @RequestParam(name = "editormd-image-file", required = true)
-                                                MultipartFile file){
+                                         HttpServletResponse response,
+                                         @ApiParam(name = "editormd-image-file", value = "文件数组", required = true)
+                                         @RequestParam(name = "editormd-image-file", required = true)
+                                                 MultipartFile file) {
         //文件上传
         try {
-            request.setCharacterEncoding( "utf-8" );
-            response.setHeader( "Content-Type" , "text/html" );
+            request.setCharacterEncoding("utf-8");
+            response.setHeader("Content-Type", "text/html");
 
-            String fileName = TaleUtils.getFileKey(file.getOriginalFilename()).replaceFirst("/","");
+            String fileName = TaleUtils.getFileKey(file.getOriginalFilename()).replaceFirst("/", "");
 
             qiniuCloudService.upload(file, fileName);
             AttAchDomain attAch = new AttAchDomain();
@@ -95,11 +92,11 @@ public class AttAchController {
             attAch.setFname(fileName);
             attAch.setFkey(qiniuCloudService.QINIU_UPLOAD_SITE + fileName);
             attAchService.addAttAch(attAch);
-            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + attAch.getFkey() + "\"}" );
+            response.getWriter().write("{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + attAch.getFkey() + "\"}");
         } catch (IOException e) {
             e.printStackTrace();
             try {
-                response.getWriter().write( "{\"success\":0}" );
+                response.getWriter().write("{\"success\":0}");
             } catch (IOException e1) {
                 throw BusinessException.withErrorCode(ErrorConstant.Att.UPLOAD_FILE_FAIL)
                         .withErrorMessageArguments(e.getMessage());
@@ -116,15 +113,15 @@ public class AttAchController {
                                           HttpServletResponse response,
                                           @ApiParam(name = "file", value = "文件数组", required = true)
                                           @RequestParam(name = "file", required = true)
-                                          MultipartFile[] files){
+                                                  MultipartFile[] files) {
         //文件上传
         try {
-            request.setCharacterEncoding( "utf-8" );
-            response.setHeader( "Content-Type" , "text/html" );
+            request.setCharacterEncoding("utf-8");
+            response.setHeader("Content-Type", "text/html");
 
             for (MultipartFile file : files) {
 
-                String fileName = TaleUtils.getFileKey(file.getOriginalFilename()).replaceFirst("/","");
+                String fileName = TaleUtils.getFileKey(file.getOriginalFilename()).replaceFirst("/", "");
                 qiniuCloudService.upload(file, fileName);
                 InputStream fis = file.getInputStream();
                 FileOutputStream fos = new FileOutputStream(fileName);
@@ -164,13 +161,13 @@ public class AttAchController {
     public APIResponse deleteFileInfo(
             @ApiParam(name = "id", value = "文件主键", required = true)
             @RequestParam(name = "id", required = true)
-            Integer id,
+                    Integer id,
             HttpServletRequest request
-    ){
+    ) {
         try {
             AttAchDto attAch = attAchService.getAttAchById(id);
             if (null == attAch)
-                throw BusinessException.withErrorCode(ErrorConstant.Att.DELETE_ATT_FAIL +  ": 文件不存在");
+                throw BusinessException.withErrorCode(ErrorConstant.Att.DELETE_ATT_FAIL + ": 文件不存在");
             attAchService.deleteAttAch(id);
             return APIResponse.success();
         } catch (Exception e) {

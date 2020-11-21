@@ -77,7 +77,6 @@ public class ContentDomain {
     private Integer allowFeed;
 
 
-
     public Integer getCid() {
         return cid;
     }

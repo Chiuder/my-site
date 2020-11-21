@@ -51,20 +51,20 @@ public class LinksController extends BaseController {
     public APIResponse addLink(
             @ApiParam(name = "title", value = "标签", required = true)
             @RequestParam(name = "title", required = true)
-            String title,
+                    String title,
             @ApiParam(name = "url", value = "链接", required = true)
             @RequestParam(name = "url", required = true)
-            String url,
+                    String url,
             @ApiParam(name = "logo", value = "logo", required = false)
             @RequestParam(name = "logo", required = false)
-            String logo,
+                    String logo,
             @ApiParam(name = "mid", value = "meta编号", required = false)
             @RequestParam(name = "mid", required = false)
-            Integer mid,
+                    Integer mid,
             @ApiParam(name = "sort", value = "sort", required = false)
             @RequestParam(name = "sort", required = false, defaultValue = "0")
-            int sort
-    ){
+                    int sort
+    ) {
         try {
             MetaDomain meta = new MetaDomain();
             meta.setName(title);
@@ -72,10 +72,10 @@ public class LinksController extends BaseController {
             meta.setDescription(logo);
             meta.setSort(sort);
             meta.setType(Types.LINK.getType());
-            if (null != mid){
+            if (null != mid) {
                 meta.setMid(mid);
                 metaService.updateMeta(meta);
-            }else {
+            } else {
                 metaService.addMeta(meta);
             }
         } catch (Exception e) {

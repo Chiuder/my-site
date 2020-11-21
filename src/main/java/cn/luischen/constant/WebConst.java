@@ -24,8 +24,6 @@ public class WebConst {
     public static final String USER_IN_COOKIE = "S_L_ID";
 
 
-
-
     /**
      * aes加密加盐
      */

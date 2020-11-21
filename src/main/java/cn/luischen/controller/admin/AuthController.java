@@ -34,7 +34,7 @@ import java.io.IOException;
 @Api("登录相关接口")
 @Controller
 @RequestMapping(value = "/admin")
-public class AuthController extends BaseController{
+public class AuthController extends BaseController {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthController.class);
 
@@ -46,7 +46,7 @@ public class AuthController extends BaseController{
 
     @ApiOperation("跳转登录页")
     @GetMapping(value = "/login")
-    public String login(){
+    public String login() {
         return "admin/login";
     }
 
@@ -58,17 +58,17 @@ public class AuthController extends BaseController{
             HttpServletResponse response,
             @ApiParam(name = "username", value = "用户名", required = true)
             @RequestParam(name = "username", required = true)
-            String username,
+                    String username,
             @ApiParam(name = "password", value = "密码", required = true)
             @RequestParam(name = "password", required = true)
-            String password,
+                    String password,
             @ApiParam(name = "remeber_me", value = "记住我", required = false)
             @RequestParam(name = "remeber_me", required = false)
-            String remeber_me
-    ){
+                    String remeber_me
+    ) {
 
-        String ip= IPKit.getIpAddrByRequest(request); // 获取ip并过滤登录时缓存的bug
-        Integer error_count = cache.hget("login_error_count",ip);
+        String ip = IPKit.getIpAddrByRequest(request); // 获取ip并过滤登录时缓存的bug
+        Integer error_count = cache.hget("login_error_count", ip);
         try {
             UserDomain userInfo = userService.login(username, password);
             request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, userInfo);
@@ -82,7 +82,7 @@ public class AuthController extends BaseController{
             if (error_count > 3) {
                 return APIResponse.fail("您输入密码已经错误超过3次，请10分钟后尝试");
             }
-            cache.hset("login_error_count", ip,error_count, 10 * 60); // 加入ip的过滤
+            cache.hset("login_error_count", ip, error_count, 10 * 60); // 加入ip的过滤
             String msg = "登录失败";
             if (e instanceof BusinessException) {
                 msg = e.getMessage();

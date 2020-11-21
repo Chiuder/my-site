@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- *
  * Created by Donghua.Chen on 2018/4/30.
  */
 public abstract class BaseController {
@@ -44,13 +43,14 @@ public abstract class BaseController {
 
     /**
      * 获取blog页面需要的公共数据
+     *
      * @param request
      * @return
      */
-    public BaseController blogBaseData(HttpServletRequest request, ContentCond contentCond){
+    public BaseController blogBaseData(HttpServletRequest request, ContentCond contentCond) {
 //        List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
 //        List<MetaDto> tags = metaService.getMetaList(Types.TAG.getType(), null, WebConst.MAX_POSTS);
-        List<MetaDto> links = metaService.getMetaList(Types.LINK.getType(), null,WebConst.MAX_POSTS);
+        List<MetaDto> links = metaService.getMetaList(Types.LINK.getType(), null, WebConst.MAX_POSTS);
 //        request.setAttribute("categories", categories);//分类
 //        request.setAttribute("tags", tags);//标签
         request.setAttribute("links", links);
@@ -63,8 +63,10 @@ public abstract class BaseController {
 
         return this;
     }
+
     /**
      * 获取请求绑定的登录对象
+     *
      * @param request
      * @return
      */
@@ -72,7 +74,7 @@ public abstract class BaseController {
         return TaleUtils.getLoginUser(request);
     }
 
-    public Integer getUid(HttpServletRequest request){
+    public Integer getUid(HttpServletRequest request) {
         return this.user(request).getUid();
     }
 

@@ -57,7 +57,7 @@ public class BusinessException extends RuntimeException {
 
     public static BusinessException fromAPIResponse(APIResponse apiResponse) {
         BusinessException businessException = new BusinessException();
-        if(apiResponse == null) {
+        if (apiResponse == null) {
             apiResponse = APIResponse.fail("NULL");
         }
 
@@ -66,18 +66,19 @@ public class BusinessException extends RuntimeException {
     }
 
     public BusinessException withErrorMessageArguments(String... errorMessageArguments) {
-        if(errorMessageArguments != null) {
+        if (errorMessageArguments != null) {
             this.errorMessageArguments = errorMessageArguments;
         }
 
         return this;
     }
+
     public APIResponse response() {
-        if(this.apiResponse != null) {
+        if (this.apiResponse != null) {
             return this.apiResponse;
         } else {
             this.apiResponse = APIResponse.widthCode(this.getErrorCode());
-            if(this.getErrorMessageArguments() != null && this.getErrorMessageArguments().length > 0) {
+            if (this.getErrorMessageArguments() != null && this.getErrorMessageArguments().length > 0) {
                 try {
                     this.apiResponse.setMsg(MessageFormat.format(this.apiResponse.getMsg(), this.getErrorMessageArguments()));
                 } catch (Exception var2) {

@@ -22,8 +22,8 @@ public class UserController {
 
     @GetMapping("/docker")
     @ResponseBody
-    public APIResponse<String> dockerTest(){
+    public APIResponse<String> dockerTest() {
         return APIResponse.success((Object) "hello docker");
     }
-    
+
 }

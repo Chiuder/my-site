@@ -41,9 +41,6 @@ public class LogDomain implements Serializable {
     private Integer created;
 
 
-
-
-
     public Integer getId() {
         return id;
     }

@@ -36,7 +36,7 @@ public class CategoryController extends BaseController {
 
     @ApiOperation("进入分类和标签页")
     @GetMapping(value = "")
-    public String index(HttpServletRequest request){
+    public String index(HttpServletRequest request) {
         List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
         List<MetaDto> tags = metaService.getMetaList(Types.TAG.getType(), null, WebConst.MAX_POSTS);
         request.setAttribute("categories", categories);
@@ -50,18 +50,18 @@ public class CategoryController extends BaseController {
     public APIResponse addCategory(
             @ApiParam(name = "cname", value = "分类名", required = true)
             @RequestParam(name = "cname", required = true)
-            String cname,
+                    String cname,
             @ApiParam(name = "mid", value = "meta编号", required = false)
             @RequestParam(name = "mid", required = false)
-            Integer mid
-    ){
+                    Integer mid
+    ) {
         try {
-            metaService.saveMeta(Types.CATEGORY.getType(),cname,mid);
+            metaService.saveMeta(Types.CATEGORY.getType(), cname, mid);
 
         } catch (Exception e) {
             e.printStackTrace();
             String msg = "分类保存失败";
-            if (e instanceof BusinessException){
+            if (e instanceof BusinessException) {
                 BusinessException ex = (BusinessException) e;
                 msg = ex.getErrorCode();
             }
@@ -78,8 +78,8 @@ public class CategoryController extends BaseController {
     public APIResponse delete(
             @ApiParam(name = "mid", value = "主键", required = true)
             @RequestParam(name = "mid", required = true)
-            Integer mid
-    ){
+                    Integer mid
+    ) {
         try {
             metaService.deleteMetaById(mid);
 
@@ -88,6 +88,6 @@ public class CategoryController extends BaseController {
             LOGGER.error(e.getMessage());
             return APIResponse.fail(e.getMessage());
         }
-        return  APIResponse.success();
+        return APIResponse.success();
     }
 }

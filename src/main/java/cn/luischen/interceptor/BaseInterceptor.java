@@ -90,7 +90,7 @@ public class BaseInterceptor implements HandlerInterceptor {
     }
 
     private void initSiteConfig(HttpServletRequest request) {
-        if (WebConst.initConfig.isEmpty()){
+        if (WebConst.initConfig.isEmpty()) {
             List<OptionsDomain> options = optionService.getOptions();
             Map<String, String> querys = new HashMap<>();
             options.forEach(option -> {

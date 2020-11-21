@@ -18,6 +18,7 @@ public interface SiteService {
 
     /**
      * 获取评论列表
+     *
      * @param limit
      * @return
      */
@@ -25,6 +26,7 @@ public interface SiteService {
 
     /**
      * 获取最新的文章
+     *
      * @param limit
      * @return
      */
@@ -32,6 +34,7 @@ public interface SiteService {
 
     /**
      * 获取单条评论
+     *
      * @param coid
      * @return
      */
@@ -39,12 +42,14 @@ public interface SiteService {
 
     /**
      * 获取 后台统计数据
+     *
      * @return
      */
     StatisticsDto getStatistics();
 
     /**
      * 获取归档列表 - 只是获取日期和数量
+     *
      * @param contentCond
      * @return
      */
@@ -52,15 +57,16 @@ public interface SiteService {
 
     /**
      * 获取归档列表
+     *
      * @param contentCond 查询条件（只包含开始时间和结束时间）
      * @return
      */
     List<ArchiveDto> getArchives(ContentCond contentCond);
 
 
-
     /**
      * 获取分类/标签列表
+     *
      * @param type
      * @param orderBy
      * @param limit

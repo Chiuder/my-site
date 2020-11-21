@@ -39,7 +39,7 @@ public class SettingController extends BaseController {
 
     @ApiOperation("进入设置页")
     @GetMapping(value = "")
-    public String setting(HttpServletRequest request){
+    public String setting(HttpServletRequest request) {
         List<OptionsDomain> optionsList = optionService.getOptions();
         Map<String, String> options = new HashMap<>();
         optionsList.forEach((option) -> {
@@ -70,11 +70,6 @@ public class SettingController extends BaseController {
             return APIResponse.fail(e.getMessage());
         }
     }
-
-
-
-
-
 
 
 }

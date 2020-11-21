@@ -54,11 +54,11 @@ public class ArticleController extends BaseController {
             HttpServletRequest request,
             @ApiParam(name = "page", value = "页数", required = false)
             @RequestParam(name = "page", required = false, defaultValue = "1")
-            int page,
+                    int page,
             @ApiParam(name = "limit", value = "每页数量", required = false)
             @RequestParam(name = "limit", required = false, defaultValue = "15")
-            int limit
-    ){
+                    int limit
+    ) {
         PageInfo<ContentDomain> articles = contentService.getArticlesByCond(new ContentCond(), page, limit);
         request.setAttribute("articles", articles);
         return "admin/article_list";
@@ -67,7 +67,7 @@ public class ArticleController extends BaseController {
 
     @ApiOperation("发布文章页")
     @GetMapping(value = "/publish")
-    public String newArticle(HttpServletRequest request){
+    public String newArticle(HttpServletRequest request) {
         MetaCond metaCond = new MetaCond();
         metaCond.setType(Types.CATEGORY.getType());
         List<MetaDomain> metas = metaService.getMetas(metaCond);
@@ -82,32 +82,32 @@ public class ArticleController extends BaseController {
             HttpServletRequest request,
             @ApiParam(name = "title", value = "标题", required = true)
             @RequestParam(name = "title", required = true)
-            String title,
+                    String title,
             @ApiParam(name = "titlePic", value = "标题图片", required = false)
             @RequestParam(name = "titlePic", required = false)
-            String titlePic,
+                    String titlePic,
             @ApiParam(name = "slug", value = "内容缩略名", required = false)
             @RequestParam(name = "slug", required = false)
-            String slug,
+                    String slug,
             @ApiParam(name = "content", value = "内容", required = true)
             @RequestParam(name = "content", required = true)
-            String content,
+                    String content,
             @ApiParam(name = "type", value = "文章类型", required = true)
             @RequestParam(name = "type", required = true)
-            String type,
+                    String type,
             @ApiParam(name = "status", value = "文章状态", required = true)
             @RequestParam(name = "status", required = true)
-            String status,
+                    String status,
             @ApiParam(name = "tags", value = "标签", required = false)
             @RequestParam(name = "tags", required = false)
-            String tags,
+                    String tags,
             @ApiParam(name = "categories", value = "分类", required = false)
             @RequestParam(name = "categories", required = false, defaultValue = "默认分类")
-            String categories,
+                    String categories,
             @ApiParam(name = "allowComment", value = "是否允许评论", required = true)
             @RequestParam(name = "allowComment", required = true)
-            Boolean allowComment
-            ){
+                    Boolean allowComment
+    ) {
         ContentDomain contentDomain = new ContentDomain();
         contentDomain.setTitle(title);
         contentDomain.setTitlePic(titlePic);
@@ -134,7 +134,7 @@ public class ArticleController extends BaseController {
             @PathVariable
                     Integer cid,
             HttpServletRequest request
-    ){
+    ) {
         ContentDomain content = contentService.getArticleById(cid);
         request.setAttribute("contents", content);
         MetaCond metaCond = new MetaCond();
@@ -180,7 +180,7 @@ public class ArticleController extends BaseController {
             @ApiParam(name = "allowComment", value = "是否允许评论", required = true)
             @RequestParam(name = "allowComment", required = true)
                     Boolean allowComment
-    ){
+    ) {
         ContentDomain contentDomain = new ContentDomain();
         contentDomain.setCid(cid);
         contentDomain.setTitle(title);
@@ -203,11 +203,11 @@ public class ArticleController extends BaseController {
     public APIResponse deleteArticle(
             @ApiParam(name = "cid", value = "文章主键", required = true)
             @RequestParam(name = "cid", required = true)
-            Integer cid,
+                    Integer cid,
             HttpServletRequest request
-    ){
-            contentService.deleteArticleById(cid);
-            logService.addLog(LogActions.DEL_ARTICLE.getAction(), cid + "", request.getRemoteAddr(), this.getUid(request));
-            return APIResponse.success();
+    ) {
+        contentService.deleteArticleById(cid);
+        logService.addLog(LogActions.DEL_ARTICLE.getAction(), cid + "", request.getRemoteAddr(), this.getUid(request));
+        return APIResponse.success();
     }
 }

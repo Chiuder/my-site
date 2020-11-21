@@ -33,11 +33,12 @@ public class WebLogAspect {
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     @Pointcut("execution(public * cn.luischen.controller..*.*(..))")
-    public void webLog(){}
+    public void webLog() {
+    }
 
 
     @Before("webLog()")
-    public void doBefore(JoinPoint joinPoint){
+    public void doBefore(JoinPoint joinPoint) {
 
         startTime.set(System.currentTimeMillis());
 
