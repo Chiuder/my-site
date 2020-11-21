@@ -80,13 +80,14 @@
                                 <div class="col-md-2 text-center m-t-10">
                                     <a th:href="${attach.fkey}" target="_blank">
                                         <img class="attach-img"
-                                             th:src="@{${attach.ftype == 'image'}?${attach.fkey}: '/admin/images/attach.png'}"
+                                             th:src="@{${attach.ftype == 'image'} ? ${attach.fkey} : '/admin/images/attach.png'}"
                                              th:title="${attach.fname}"/>
                                     </a>
                                     <div class="clearfix m-t-10">
-                <span class="attach-text" data-toggle="tooltip" data-placement="top"
-                      th:attr="data-original-title=${attach.fname}"
-                      th:text="${commons.substr(attach.fname, 12)}"></span>
+                                        <span class="attach-text" data-toggle="tooltip" data-placement="top"
+                                              th:attr="data-original-title=${attach.fname}"
+                                              th:text="${commons.substr(attach.fname, 12)}">
+                                        </span>
                                     </div>
                                     <div class="clearfix">
                                         <button th:attr="url=${attach.fkey}" type="button"
