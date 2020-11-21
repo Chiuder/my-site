@@ -4,9 +4,9 @@
 
     <!-- logo -->
 
-    <h1><a th:href="@{/}" title="avana LLC"><img
-            th:src="@{http://img.winterchen.com/BF6AC5E5-C8D7-4841-B3ED-9D898586D5FF-9703-0000073B1BF8A7F8_tmp.PNG}"
-            style="width: 66px;" title="Luis" alt="Luis"/></a></h1>
+    <h1><a th:href="@{/}" title="Logo"><img
+            th:src="@{'/site/images/logo.png'}"
+            style="width: 66px;" title="Logo" alt="Chiuder"/></a></h1>
 
 
     <!-- logo -->
@@ -16,8 +16,8 @@
     <nav role="footer-nav">
         <ul>
             <li><a th:href="@{/}" title="Work">Work</a></li>
-            <li><a th:href="@{/about}" title="About">About</a></li>
             <li><a th:href="@{/blog/index}" title="Blog">Blog</a></li>
+            <li><a th:href="@{/about}" title="About">About</a></li>
         </ul>
     </nav>
 
@@ -52,7 +52,7 @@
             </th:block>
         </th:block>
     </ul>
-    <p class="copy-right">&copy; 2018
+    <p class="copy-right">&copy; 2020
         <th:block th:text="${title}"></th:block>
     </p>
     <th:block th:if="${record != null and record != ''}"><a class="copy-right" th:href="@{http://www.miitbeian.gov.cn/}"
